@@ -1,6 +1,13 @@
 @import 'open-props/open-props.min.css';
 @import 'open-props/normalize.min.css';
 
+.pageWrapper {
+  background-color: var(--surface-1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
   max-width: 600px;
   margin: var(--size-10) auto;
@@ -12,9 +19,28 @@
   color: var(--text-1);
 }
 
-h2 {
-  margin-bottom: var(--size-6);
-  color: var(--text-1);
+.welcome {
+  font-family: 'Fredoka', sans-serif;
+  font-size: var(--font-size-fluid-2);
+  margin-bottom: var(--size-2);
+}
+
+.username {
+  font-family: 'Fredoka', sans-serif;
+  font-size: var(--font-size-fluid-2);
+  color: var(--link);
+  margin-bottom: var(--size-4);
+}
+
+.userIcon {
+  margin-right: var(--size-2);
+}
+
+.question {
+  font-family: 'OCR A Std', monospace;
+  font-size: 1rem;
+  margin-bottom: var(--size-5);
+  color: var(--text-2);
 }
 
 .buttonGroup {
@@ -30,6 +56,7 @@ h2 {
   border: none;
   border-radius: var(--radius-2);
   font-size: 1rem;
+  font-family: 'OCR A Std', monospace;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }

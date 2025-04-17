@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './UserHub.module.css';
+import Navbar from '../components/Navbar';
 
 export default function UserHub() {
   const [nombre, setNombre] = useState('');
@@ -11,27 +12,29 @@ export default function UserHub() {
     if (usuario && usuario.username) {
       setNombre(usuario.username);
     } else {
-      // Si no hay sesión activa, redirigir a login
       navigate('/login');
     }
   }, [navigate]);
 
   return (
-    <div className={styles.container}>
-      <h2>Hola {nombre}! ¿Qué movimiento/s quieres hacer hoy?</h2>
-      <div className={styles.buttonGroup}>
-        <button onClick={() => navigate('/actions')} className={styles.button}>
-          Ver lista de acciones
-        </button>
-        <button onClick={() => navigate('/actions/TSLA')} className={styles.button}>
-          Ver detalle de acción
-        </button>
-        <button onClick={() => navigate('/purchases')} className={styles.button}>
-          Ver historial de compras
-        </button>
-        <button onClick={() => navigate('/wallet')} className={styles.button}>
-          Ir a mi billetera
-        </button>
+    <div className={styles.pageWrapper}>
+      <Navbar />
+      <div className={styles.container}>
+        <h2 className={styles.welcome}>Bienvenido/a</h2>
+        <h2 className={styles.username}><span className={styles.userIcon}>👤</span>{nombre}</h2>
+        <p className={styles.question}>¿Qué movimiento/s quieres hacer hoy?</p>
+
+        <div className={styles.buttonGroup}>
+          <button onClick={() => navigate('/wallet')} className={styles.button}>
+            Ver billetera
+          </button>
+          <button onClick={() => navigate('/actions')} className={styles.button}>
+            Ver lista de acciones
+          </button>
+          <button onClick={() => navigate('/purchases')} className={styles.button}>
+            Ver historial de compras
+          </button>
+        </div>
       </div>
     </div>
   );

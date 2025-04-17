@@ -1,0 +1,39 @@
+@import 'open-props/open-props.min.css';
+@import 'open-props/normalize.min.css';
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--size-3) var(--size-6);
+  background-color: var(--link);
+  color: white;
+}
+
+.brand {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.navLinks {
+  display: flex;
+  gap: var(--size-3);
+}
+
+.navButton {
+  background: none;
+  border: none;
+  color: white;
+  font-family: 'OCR A Std', monospace;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.navButton:hover {
+  opacity: 0.8;
+}
