@@ -17,7 +17,29 @@ export default function ActionDetail() {
   }
 
   const handleBuy = () => {
-    // Aquí más adelante podrías simular una compra real
+    const usuario = JSON.parse(localStorage.getItem('usuarioActivo'));
+
+    if (!usuario) {
+      alert('Debes iniciar sesión para comprar.');
+      navigate('/login');
+      return;
+    }
+
+    // Cargar compras existentes o iniciar nueva lista
+    const comprasPrevias = JSON.parse(localStorage.getItem('compras')) || [];
+
+    const nuevaCompra = {
+      username: usuario.username,
+      symbol: action.symbol,
+      price: action.price,
+      quantity: 1,
+      status: "ACEPTADA", // o "EN PROCESO", puedes alternar aleatorio si quieres
+      timestamp: new Date().toISOString()
+    };
+
+    const nuevasCompras = [...comprasPrevias, nuevaCompra];
+    localStorage.setItem('compras', JSON.stringify(nuevasCompras));
+
     navigate('/purchases');
   };
 

@@ -1,0 +1,49 @@
+.container {
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .item {
+    padding: 1rem;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .item:last-child {
+    border-bottom: none;
+  }
+  
+  .item p {
+    margin: 0.3rem 0;
+    font-size: 1rem;
+  }
+  
+  .aceptada {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .rechazada {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .en {
+    color: orange;
+    font-weight: bold;
+  }
+  
