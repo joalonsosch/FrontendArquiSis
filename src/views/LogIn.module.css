@@ -1,50 +1,55 @@
+@import 'open-props/open-props.min.css';
+@import 'open-props/normalize.min.css';
+
 .container {
-    max-width: 400px;
-    margin: 100px auto;
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #333;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .input {
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-  }
-  
-  .button {
-    padding: 0.75rem;
-    background-color: #007acc;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button:hover {
-    background-color: #005a99;
-  }
-  
-  .error {
-    color: red;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  
+  max-width: 400px;
+  margin: var(--size-10) auto;
+  background-color: var(--surface-2);
+  padding: var(--size-6);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-3);
+  color: var(--text-1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: var(--size-5);
+  color: var(--text-1);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  padding: var(--size-2);
+  margin-bottom: var(--size-3);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-2);
+  font-size: 1rem;
+  background-color: var(--surface-3);
+  color: var(--text-1);
+}
+
+.button {
+  padding: var(--size-2);
+  background-color: var(--link);
+  color: white;
+  border: none;
+  border-radius: var(--radius-2);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--link-hover);
+}
+
+.error {
+  color: var(--red-6);
+  font-size: 0.9rem;
+  margin-bottom: var(--size-3);
+  text-align: center;
+}

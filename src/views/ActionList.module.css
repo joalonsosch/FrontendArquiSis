@@ -1,57 +1,61 @@
+@import 'open-props/open-props.min.css';
+@import 'open-props/normalize.min.css';
+
 .container {
-    max-width: 1200px;
-    margin: 80px auto;
-    padding: 2rem;
-    text-align: center;
-  }
-  
-  h2 {
-    margin-bottom: 2rem;
-    color: #333;
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 2rem;
-  }
-  
-  .card {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    text-align: left;
-    transition: transform 0.2s ease;
-  }
-  
-  .card:hover {
-    transform: translateY(-4px);
-  }
-  
-  .card h3 {
-    margin-bottom: 0.5rem;
-    color: #222;
-  }
-  
-  .card p {
-    margin: 0.25rem 0;
-    color: #555;
-  }
-  
-  .button {
-    margin-top: 1rem;
-    background-color: #007acc;
-    color: white;
-    padding: 0.6rem 1rem;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button:hover {
-    background-color: #005a99;
-  }
-  
+  max-width: 1200px;
+  margin: var(--size-10) auto;
+  padding: var(--size-6);
+  text-align: center;
+  color: var(--text-1);
+}
+
+h2 {
+  margin-bottom: var(--size-5);
+  color: var(--text-1);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--size-5);
+}
+
+.card {
+  background-color: var(--surface-2);
+  border-radius: var(--radius-3);
+  padding: var(--size-5);
+  box-shadow: var(--shadow-2);
+  text-align: left;
+  transition: transform 0.2s ease;
+  color: var(--text-1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card h3 {
+  margin-bottom: var(--size-2);
+  color: var(--text-1);
+}
+
+.card p {
+  margin: 0.25rem 0;
+  color: var(--text-2);
+}
+
+.button {
+  margin-top: var(--size-4);
+  background-color: var(--link);
+  color: white;
+  padding: var(--size-2) var(--size-4);
+  border: none;
+  border-radius: var(--radius-2);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--link-hover);
+}

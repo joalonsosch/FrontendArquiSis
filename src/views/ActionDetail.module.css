@@ -1,44 +1,47 @@
+@import 'open-props/open-props.min.css';
+@import 'open-props/normalize.min.css';
+
 .container {
-    max-width: 600px;
-    margin: 100px auto;
-    padding: 2rem;
-    background-color: #fefefe;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    text-align: center;
-  }
-  
-  h2 {
-    margin-bottom: 1.5rem;
-    color: #222;
-  }
-  
-  p {
-    margin: 0.5rem 0;
-    color: #444;
-    font-size: 1rem;
-  }
-  
-  .button {
-    margin-top: 2rem;
-    background-color: #007acc;
-    color: white;
-    padding: 0.75rem 1.25rem;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button:hover {
-    background-color: #005a99;
-  }
-  
-  .notFound {
-    max-width: 600px;
-    margin: 120px auto;
-    text-align: center;
-    color: #990000;
-  }
-  
+  max-width: 600px;
+  margin: var(--size-10) auto;
+  padding: var(--size-6);
+  background-color: var(--surface-2);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-3);
+  text-align: center;
+  color: var(--text-1);
+}
+
+h2 {
+  margin-bottom: var(--size-5);
+  color: var(--text-1);
+}
+
+p {
+  margin: var(--size-2) 0;
+  font-size: 1rem;
+  color: var(--text-2);
+}
+
+.button {
+  margin-top: var(--size-5);
+  padding: var(--size-2) var(--size-5);
+  background-color: var(--link);
+  color: white;
+  border: none;
+  border-radius: var(--radius-2);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--link-hover);
+}
+
+.notFound {
+  max-width: 600px;
+  margin: var(--size-10) auto;
+  text-align: center;
+  color: var(--red-6);
+}

@@ -1,37 +1,39 @@
+@import 'open-props/open-props.min.css';
+@import 'open-props/normalize.min.css';
+
 .container {
-    max-width: 600px;
-    margin: 100px auto;
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    margin-bottom: 2rem;
-    color: #333;
-    font-weight: 500;
-  }
-  
-  .buttonGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .button {
-    padding: 0.75rem 1rem;
-    background-color: #0066cc;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .button:hover {
-    background-color: #004a99;
-  }
-  
+  max-width: 600px;
+  margin: var(--size-10) auto;
+  background-color: var(--surface-2);
+  padding: var(--size-6);
+  border-radius: var(--radius-3);
+  text-align: center;
+  box-shadow: var(--shadow-3);
+  color: var(--text-1);
+}
+
+h2 {
+  margin-bottom: var(--size-6);
+  color: var(--text-1);
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4);
+}
+
+.button {
+  padding: var(--size-2) var(--size-4);
+  background-color: var(--link);
+  color: white;
+  border: none;
+  border-radius: var(--radius-2);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: var(--link-hover);
+}
