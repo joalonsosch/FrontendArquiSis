@@ -10,6 +10,8 @@ import ActionPurchases from '../views/ActionPurchases';
 import Wallet from '../views/Wallet';
 import ErrorPage from '../views/ErrorPage';
 
+import ProtectedRoute from '../components/ProtectedRoute';
+
 export default function AppRouter() {
   return (
     <Router>
@@ -17,11 +19,48 @@ export default function AppRouter() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<SignIn />} />
         <Route path="/login" element={<LogIn />} />
-        <Route path="/home" element={<UserHub />} />
-        <Route path="/actions" element={<ActionList />} />
-        <Route path="/actions/:symbol" element={<ActionDetail />} />
-        <Route path="/purchases" element={<ActionPurchases />} />
-        <Route path="/wallet" element={<Wallet />} />
+
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <UserHub />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/actions"
+          element={
+            <ProtectedRoute>
+              <ActionList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/actions/:symbol"
+          element={
+            <ProtectedRoute>
+              <ActionDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/purchases"
+          element={
+            <ProtectedRoute>
+              <ActionPurchases />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/wallet"
+          element={
+            <ProtectedRoute>
+              <Wallet />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>
