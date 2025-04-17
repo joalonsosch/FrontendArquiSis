@@ -1,0 +1,71 @@
+@import 'open-props/open-props.min.css';
+@import 'open-props/normalize.min.css';
+
+.pageWrapper {
+  background-color: var(--surface-1);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: var(--size-10) auto;
+  padding: var(--size-6);
+  color: var(--text-1);
+  font-family: 'OCR A Std', monospace;
+}
+
+.title {
+  text-align: center;
+  font-family: 'Fredoka', sans-serif;
+  margin-bottom: var(--size-5);
+  color: var(--text-1);
+  font-size: var(--font-size-fluid-2);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--size-5);
+}
+
+.card {
+  background-color: var(--surface-2);
+  border-radius: var(--radius-3);
+  padding: var(--size-5);
+  box-shadow: var(--shadow-2);
+  text-align: left;
+  transition: transform 0.2s ease;
+  color: var(--text-1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card h3 {
+  margin-bottom: var(--size-2);
+  color: var(--text-1);
+  font-family: 'Fredoka', sans-serif;
+}
+
+.card p {
+  margin: 0.25rem 0;
+  color: var(--text-2);
+}
+
+.button {
+  margin-top: var(--size-4);
+  background-color: var(--link);
+  color: white;
+  padding: var(--size-2) var(--size-4);
+  border: none;
+  border-radius: var(--radius-2);
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-family: 'OCR A Std', monospace;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--link-hover);
+}

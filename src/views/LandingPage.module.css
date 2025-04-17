@@ -1,0 +1,51 @@
+@import 'open-props/open-props.min.css';
+@import 'open-props/normalize.min.css';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: var(--surface-1);
+  padding: var(--size-6);
+  color: var(--text-1);
+  font-family: 'OCR A Std', monospace;
+}
+
+.title {
+  font-size: var(--font-size-fluid-3);
+  margin-bottom: var(--size-4);
+  color: var(--text-1);
+  font-family: 'Fredoka', sans-serif;
+  text-align: center;
+}
+
+.image {
+  width: 320px;
+  max-width: 80%;
+  margin: var(--size-4) 0;
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-2);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: var(--size-4);
+  margin-top: var(--size-4);
+}
+
+.button {
+  background-color: var(--link);
+  color: white;
+  padding: var(--size-2) var(--size-4);
+  text-decoration: none;
+  border-radius: var(--radius-2);
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.button:hover {
+  background-color: var(--link-hover);
+}

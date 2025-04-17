@@ -1,0 +1,62 @@
+@import 'open-props/open-props.min.css';
+@import 'open-props/normalize.min.css';
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--surface-1);
+  color: var(--text-1);
+  font-family: 'OCR A Std', monospace;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: var(--size-5);
+  color: var(--text-1);
+  font-family: 'Fredoka', sans-serif;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-2);
+  padding: var(--size-6);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-3);
+  max-width: 400px;
+  width: 100%;
+}
+
+.input {
+  padding: var(--size-2);
+  margin-bottom: var(--size-3);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-2);
+  font-size: 1rem;
+  background-color: var(--surface-3);
+  color: var(--text-1);
+}
+
+.button {
+  padding: var(--size-2);
+  background-color: var(--link);
+  color: white;
+  border: none;
+  border-radius: var(--radius-2);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--link-hover);
+}
+
+.error {
+  color: var(--red-6);
+  font-size: 0.9rem;
+  margin-bottom: var(--size-3);
+  text-align: center;
+}
