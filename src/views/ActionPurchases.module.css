@@ -1,6 +1,11 @@
 @import 'open-props/open-props.min.css';
 @import 'open-props/normalize.min.css';
 
+.pageWrapper {
+  background-color: var(--surface-1);
+  min-height: 100vh;
+}
+
 .container {
   max-width: 800px;
   margin: var(--size-10) auto;
@@ -9,12 +14,14 @@
   border-radius: var(--radius-3);
   box-shadow: var(--shadow-3);
   color: var(--text-1);
+  font-family: 'OCR A Std', monospace;
 }
 
 h2 {
   text-align: center;
   margin-bottom: var(--size-5);
   color: var(--text-1);
+  font-family: 'Fredoka', sans-serif;
 }
 
 .list {
@@ -34,6 +41,7 @@ h2 {
 .item p {
   margin: 0.3rem 0;
   font-size: 1rem;
+  font-family: 'OCR A Std', monospace;
 }
 
 .aceptada {
