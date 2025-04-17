@@ -1,17 +1,25 @@
 @import 'open-props/open-props.min.css';
 @import 'open-props/normalize.min.css';
 
+.pageWrapper {
+  background-color: var(--surface-1);
+  min-height: 100vh;
+}
+
 .container {
   max-width: 1200px;
   margin: var(--size-10) auto;
   padding: var(--size-6);
-  text-align: center;
   color: var(--text-1);
+  font-family: 'OCR A Std', monospace;
 }
 
-h2 {
+.title {
+  text-align: center;
+  font-family: 'Fredoka', sans-serif;
   margin-bottom: var(--size-5);
   color: var(--text-1);
+  font-size: var(--font-size-fluid-2);
 }
 
 .grid {
@@ -37,6 +45,7 @@ h2 {
 .card h3 {
   margin-bottom: var(--size-2);
   color: var(--text-1);
+  font-family: 'Fredoka', sans-serif;
 }
 
 .card p {
@@ -53,6 +62,7 @@ h2 {
   border-radius: var(--radius-2);
   font-size: 0.95rem;
   cursor: pointer;
+  font-family: 'OCR A Std', monospace;
   transition: background-color 0.3s ease;
 }
 
