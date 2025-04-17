@@ -12,10 +12,8 @@ export default function SignIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Obtener registros existentes (o lista vacía si no hay)
     const registros = JSON.parse(localStorage.getItem('registro')) || [];
 
-    // Validar si el nombre o el correo ya existen
     const usernameTaken = registros.some((u) => u.username === username);
     const emailTaken = registros.some((u) => u.email === email);
 
@@ -29,19 +27,17 @@ export default function SignIn() {
       return;
     }
 
-    // Agregar nuevo usuario al registro
     const nuevoUsuario = { username, email, password };
     const nuevosRegistros = [...registros, nuevoUsuario];
     localStorage.setItem('registro', JSON.stringify(nuevosRegistros));
 
-    // Redirigir al login
     navigate('/login');
   };
 
   return (
     <div className={styles.container}>
-      <h2>Registro de nuevo usuario</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <h2>Registro de nuevo usuario</h2>
         <input
           type="text"
           placeholder="Nombre de usuario"

@@ -2,24 +2,31 @@
 @import 'open-props/normalize.min.css';
 
 .container {
-  max-width: 400px;
-  margin: var(--size-10) auto;
-  background-color: var(--surface-2);
-  padding: var(--size-6);
-  border-radius: var(--radius-3);
-  box-shadow: var(--shadow-3);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--surface-1);
   color: var(--text-1);
+  font-family: 'OCR A Std', monospace;
 }
 
 h2 {
   text-align: center;
   margin-bottom: var(--size-5);
   color: var(--text-1);
+  font-family: 'Fredoka', sans-serif;
 }
 
 .form {
   display: flex;
   flex-direction: column;
+  background-color: var(--surface-2);
+  padding: var(--size-6);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-3);
+  max-width: 400px;
+  width: 100%;
 }
 
 .input {
