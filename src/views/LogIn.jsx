@@ -25,17 +25,14 @@ export default function LogIn() {
       return;
     }
 
-    // Guardar sesión simulada si se desea
     localStorage.setItem('usuarioActivo', JSON.stringify(usuario));
-
-    alert('Usuario ingresado exitosamente');
     navigate('/home');
   };
 
   return (
     <div className={styles.container}>
-      <h2>Iniciar sesión</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <h2>Iniciar sesión</h2>
         <input
           type="text"
           placeholder="Nombre de usuario"
