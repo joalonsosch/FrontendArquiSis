@@ -1,0 +1,14 @@
+@import 'open-props/open-props.min.css';
+@import 'open-props/normalize.min.css';
+
+/* Estilos base para toda la app */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--surface-1);
+  color: var(--text-1);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+}
