@@ -1,6 +1,11 @@
 @import 'open-props/open-props.min.css';
 @import 'open-props/normalize.min.css';
 
+.pageWrapper {
+  background-color: var(--surface-1);
+  min-height: 100vh;
+}
+
 .container {
   max-width: 600px;
   margin: var(--size-10) auto;
@@ -10,11 +15,13 @@
   box-shadow: var(--shadow-3);
   text-align: center;
   color: var(--text-1);
+  font-family: 'OCR A Std', monospace;
 }
 
 h2 {
   margin-bottom: var(--size-5);
   color: var(--text-1);
+  font-family: 'Fredoka', sans-serif;
 }
 
 p {
@@ -31,6 +38,7 @@ p {
   border: none;
   border-radius: var(--radius-2);
   font-size: 1rem;
+  font-family: 'OCR A Std', monospace;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -44,4 +52,5 @@ p {
   margin: var(--size-10) auto;
   text-align: center;
   color: var(--red-6);
+  font-family: 'OCR A Std', monospace;
 }
