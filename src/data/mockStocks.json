@@ -1,0 +1,147 @@
+[
+    {
+      "symbol": "TSLA",
+      "price": 241550.0,
+      "shortName": "Tesla, Inc.",
+      "longName": "Tesla, Inc.",
+      "quantity": 1,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4566
+    },
+    {
+      "symbol": "META",
+      "price": 34550.0,
+      "shortName": "Meta Platforms, Inc.",
+      "longName": "Meta Platforms, Inc.",
+      "quantity": 2,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4567
+    },
+    {
+      "symbol": "NFLX",
+      "price": 5550.0,
+      "shortName": "Netflix, Inc.",
+      "longName": "Netflix, Inc.",
+      "quantity": 5,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4568
+    },
+    {
+      "symbol": "AAPL",
+      "price": 1200.0,
+      "shortName": "Apple Inc.",
+      "longName": "Apple Inc.",
+      "quantity": 3,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4569
+    },
+    {
+      "symbol": "GOOGL",
+      "price": 500.0,
+      "shortName": "Alphabet Inc.",
+      "longName": "Alphabet Inc.",
+      "quantity": 4,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4570
+    },
+    {
+      "symbol": "MSFT",
+      "price": 7800.0,
+      "shortName": "Microsoft Corporation",
+      "longName": "Microsoft Corporation",
+      "quantity": 10,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4571
+    },
+    {
+      "symbol": "AMZN",
+      "price": 9920.0,
+      "shortName": "Amazon.com, Inc.",
+      "longName": "Amazon.com, Inc.",
+      "quantity": 2,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4572
+    },
+    {
+      "symbol": "INTC",
+      "price": 1111.0,
+      "shortName": "Intel Corporation",
+      "longName": "Intel Corporation",
+      "quantity": 3,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4573
+    },
+    {
+      "symbol": "NVDA",
+      "price": 30220.0,
+      "shortName": "NVIDIA Corporation",
+      "longName": "NVIDIA Corporation",
+      "quantity": 1,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4574
+    },
+    {
+      "symbol": "UBER",
+      "price": 700.0,
+      "shortName": "Uber Technologies, Inc.",
+      "longName": "Uber Technologies, Inc.",
+      "quantity": 7,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4575
+    },
+    {
+      "symbol": "DIS",
+      "price": 888.0,
+      "shortName": "The Walt Disney Company",
+      "longName": "The Walt Disney Company",
+      "quantity": 6,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4576
+    },
+    {
+      "symbol": "PYPL",
+      "price": 2340.0,
+      "shortName": "PayPal Holdings, Inc.",
+      "longName": "PayPal Holdings, Inc.",
+      "quantity": 4,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4577
+    },
+    {
+      "symbol": "ORCL",
+      "price": 3200.0,
+      "shortName": "Oracle Corporation",
+      "longName": "Oracle Corporation",
+      "quantity": 3,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4578
+    },
+    {
+      "symbol": "CRM",
+      "price": 6450.0,
+      "shortName": "Salesforce, Inc.",
+      "longName": "Salesforce, Inc.",
+      "quantity": 2,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4579
+    },
+    {
+      "symbol": "SHOP",
+      "price": 1000.0,
+      "shortName": "Shopify Inc.",
+      "longName": "Shopify Inc.",
+      "quantity": 1,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4580
+    },
+    {
+      "symbol": "SQ",
+      "price": 2500.0,
+      "shortName": "Block, Inc.",
+      "longName": "Block, Inc.",
+      "quantity": 5,
+      "timestamp": "2025-04-16T23:25:18.202000",
+      "id": 4581
+    }
+  ]
+  
