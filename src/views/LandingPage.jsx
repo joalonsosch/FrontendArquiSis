@@ -12,7 +12,18 @@ export default function LandingPage() {
       <img src={image} alt="Fintech gráfico" className={styles.image} />
       <div className={styles.buttonGroup}>
         <button onClick={loginWithRedirect} className={styles.button}>Iniciar sesión</button>
-        <button onClick={loginWithRedirect} className={styles.button}>Registrarse</button>
+        <button
+          onClick={() =>
+            loginWithRedirect({
+              authorizationParams: {
+                screen_hint: 'signup'
+              }
+            })
+          }
+          className={styles.button}
+        >
+          Registrarse
+        </button>
       </div>
     </div>
   );
