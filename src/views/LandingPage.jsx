@@ -1,15 +1,19 @@
 import { Link } from 'react-router-dom';
 import styles from './LandingPage.module.css';
 import image from '../assets/LandingPageGPT.png';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export default function LandingPage() {
+
+  const { loginWithRedirect } = useAuth0();
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Bienvenido a LegitBusiness</h1>
       <img src={image} alt="Fintech gráfico" className={styles.image} />
       <div className={styles.buttonGroup}>
-        <Link to="/login" className={styles.button}>Iniciar sesión</Link>
-        <Link to="/register" className={styles.button}>Registrarse</Link>
+        <button onClick={loginWithRedirect} className={styles.button}>Iniciar sesión</button>
+        <button onClick={loginWithRedirect} className={styles.button}>Registrarse</button>
       </div>
     </div>
   );
