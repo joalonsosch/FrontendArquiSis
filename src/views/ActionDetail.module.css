@@ -27,14 +27,33 @@ h2 {
 p {
   margin: var(--size-2) 0;
   font-size: 1rem;
-  color: var(--text-2);
+  color: var(--text-1);
+}
+
+.buySection {
+  margin-top: var(--size-5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--size-4);
+}
+
+.input {
+  width: 80px;
+  padding: var(--size-2);
+  font-family: 'OCR A Std', monospace;
+  font-size: 1rem;
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-2);
+  background-color: var(--surface-3);
+  color: var(--text-1);
+  text-align: center;
 }
 
 .button {
-  margin-top: var(--size-5);
-  padding: var(--size-2) var(--size-5);
   background-color: var(--link);
   color: white;
+  padding: var(--size-2) var(--size-5);
   border: none;
   border-radius: var(--radius-2);
   font-size: 1rem;
