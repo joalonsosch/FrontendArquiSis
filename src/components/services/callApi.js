@@ -21,3 +21,24 @@ export async function callApi(options) {
   });
   return response.data;
 }
+
+// EJEMPLO DE USO:
+
+// export default function StockList() {
+//  const [stocks, setStocks] = useState([]);
+//
+//  useEffect(() => {
+//    callApi({ method: 'get', url: '/stocks' })
+//      .then(setStocks)
+//      .catch(console.error);
+//  }, []);
+// return (
+//  <ul>
+//  {stocks.map(s => (
+//    <li key={s.symbol}>
+//      {s.symbol} – ${s.price}
+//    </li>
+//  ))}
+//</ul>
+//);
+//}
