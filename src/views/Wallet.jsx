@@ -2,24 +2,28 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Wallet.module.css';
 import Navbar from '../components/Navbar';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export default function Wallet() {
   const [usuario, setUsuario] = useState(null);
   const [saldo, setSaldo] = useState(0);
   const [monto, setMonto] = useState('');
-  const navigate = useNavigate();
+  
+  const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('usuarioActivo'));
-    if (!user) {
-      navigate('/login');
+    if (isLoading) return;
+
+    if (!isAuthenticated) {
+      loginWithRedirect({ appState: { returnTo: '/wallet' } });
       return;
     }
 
-    setUsuario(user.username);
-    const saldoGuardado = localStorage.getItem(`saldo_${user.username}`);
+    const username = user.name || user.email;
+    setUsuario(username);
+    const saldoGuardado = localStorage.getItem(`saldo_${username}`);
     setSaldo(saldoGuardado ? parseFloat(saldoGuardado) : 0);
-  }, [navigate]);
+  }, [isLoading, isAuthenticated, user, loginWithRedirect]);
 
   const agregarFondos = () => {
     if (!monto || isNaN(monto) || parseFloat(monto) <= 0) {
@@ -33,7 +37,10 @@ export default function Wallet() {
     setMonto('');
   };
 
-  if (!usuario) {
+  if (isLoading) {
+    return <div className={styles.container}><p>Cargando billetera…</p></div>;
+  }
+  if (!isAuthenticated) {
     return <div className={styles.container}><p>Debes iniciar sesión.</p></div>;
   }
 
