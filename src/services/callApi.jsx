@@ -8,7 +8,7 @@ export function useApi() {
 
   async function callApi(options) {
     const token = await getAccessTokenSilently();
-    console.log('TOKEN:', token);
+    console.log('Token:', token);
     const response = await axios({
       baseURL: API_BASE,
       headers: {

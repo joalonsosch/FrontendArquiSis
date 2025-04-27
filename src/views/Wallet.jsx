@@ -1,15 +1,37 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
 import styles from './Wallet.module.css';
 import Navbar from '../components/Navbar';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useApi } from '../services/callApi';
 
 export default function Wallet() {
-  const [usuario, setUsuario] = useState(null);
+  const { callApi } = useApi();
   const [saldo, setSaldo] = useState(0);
   const [monto, setMonto] = useState('');
-  
+
   const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+
+  const handleBalanceWallet = useCallback(async () => {
+    try {
+      console.log('Getting wallet for user:', user.sub);
+      const balance = await callApi({
+        method: 'get',
+        url: `/wallet/${user.sub}`,
+      });
+
+      setSaldo(balance ? parseFloat(balance) : 0);
+
+    } catch (error) {
+      console.error(error);
+    }
+  }, [callApi, user?.sub]);
+
+  useEffect(() => {
+    console.log('isLoading:', isLoading);
+    if (!isLoading && isAuthenticated && user) {
+      handleBalanceWallet();
+    }
+  }, [isLoading, isAuthenticated, user, handleBalanceWallet]);
 
   useEffect(() => {
     if (isLoading) return;
@@ -19,22 +41,27 @@ export default function Wallet() {
       return;
     }
 
-    const username = user.name || user.email;
-    setUsuario(username);
-    const saldoGuardado = localStorage.getItem(`saldo_${username}`);
-    setSaldo(saldoGuardado ? parseFloat(saldoGuardado) : 0);
   }, [isLoading, isAuthenticated, user, loginWithRedirect]);
 
-  const agregarFondos = () => {
-    if (!monto || isNaN(monto) || parseFloat(monto) <= 0) {
-      alert('Ingresa un monto válido.');
-      return;
-    }
+  const agregarFondos = async () => {
+    try {
+      if (!monto || isNaN(monto) || parseFloat(monto) <= 0) {
+        alert('Ingresa un monto válido.');
+        return;
+      }
 
-    const nuevoSaldo = saldo + parseFloat(monto);
-    setSaldo(nuevoSaldo);
-    localStorage.setItem(`saldo_${usuario}`, nuevoSaldo.toString());
-    setMonto('');
+      console.log('Adding funds to wallet for user:', user.sub, "amount:", monto);
+      await callApi({
+        method: 'patch',
+        url: `/wallet/${user.sub}?amount=${monto}`
+      });
+
+      await handleBalanceWallet();
+      setMonto('');
+      
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   if (isLoading) {
@@ -48,7 +75,7 @@ export default function Wallet() {
     <div className={styles.pageWrapper}>
       <Navbar />
       <div className={styles.container}>
-        <h2>Billetera de {usuario}</h2>
+        <h2>Billetera de {user.name}</h2>
         <p><strong>Saldo actual:</strong> ${saldo.toLocaleString()}</p>
 
         <div className={styles.form}>

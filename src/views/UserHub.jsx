@@ -1,12 +1,42 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react'; // ✓ Usar Auth0 en lugar de localStorage
 import { useNavigate } from 'react-router-dom';
+import { useApi } from '../services/callApi';
 import styles from './UserHub.module.css';
 import Navbar from '../components/Navbar';
 
 export default function UserHub() {
+  const { callApi } = useApi();
   const { isAuthenticated, isLoading, user, loginWithRedirect } = useAuth0();
+  const walletCreated = useRef(false);
   const navigate = useNavigate();
+
+  const handleWallet = useCallback(async () => {
+    if (walletCreated.current) return;
+    walletCreated.current = true; 
+
+    try {
+      console.log('Creating wallet for user:', user.sub);
+      await callApi({
+        method: 'post',
+        url: '/wallet',
+        data: {
+          userid: user.sub,
+          balance: 0
+        }
+      });
+
+    } catch (error) {
+      console.error(error);
+    }
+  }, [callApi, user?.sub]);
+
+  useEffect(() => {
+    console.log('isLoading:', isLoading);
+    if (!isLoading && isAuthenticated && user) {
+      handleWallet();
+    }
+  }, [isLoading, isAuthenticated, user, handleWallet]);
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {

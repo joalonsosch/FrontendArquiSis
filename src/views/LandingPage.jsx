@@ -3,7 +3,6 @@ import image from '../assets/LandingPageGPT.png';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export default function LandingPage() {
-
   const { loginWithRedirect } = useAuth0();
 
   return (

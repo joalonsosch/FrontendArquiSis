@@ -3,7 +3,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '../services/callApi';
 import styles from './ActionList.module.css';
-// import mockStocks from '../data/mockStocks.json';
 import Navbar from '../components/Navbar';
 
 export default function ActionList() {
@@ -12,6 +11,7 @@ export default function ActionList() {
   const [stocks, setStocks] = useState([]);
   const navigate = useNavigate();
   const itemsPerPage = 9;
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({

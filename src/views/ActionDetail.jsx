@@ -1,15 +1,36 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useApi } from '../services/callApi';
 import styles from './ActionDetail.module.css';
-import mockStocks from '../data/mockStocks.json';
 import Navbar from '../components/Navbar';
 
 export default function ActionDetail() {
+  const [action, setAction] = useState([]);
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { callApi } = useApi();
   const { symbol } = useParams();
   const navigate = useNavigate();
-  const action = mockStocks.find(stock => stock.symbol === symbol);
-
   const [quantityToBuy, setQuantityToBuy] = useState(1);
+
+  useEffect(() => {
+    async function fetchStocks() {
+      try {
+        const data = await callApi({
+          method: 'get',
+          url: `/stocks/${symbol}`
+        });
+        setAction(data);
+        console.log('Action data:', data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    if (!isLoading && isAuthenticated) {
+      fetchStocks();
+    }
+  }, [isLoading, isAuthenticated, callApi, symbol]);
 
   if (!action) {
     return (
@@ -23,15 +44,7 @@ export default function ActionDetail() {
     );
   }
 
-  const handleBuy = () => {
-    const usuario = JSON.parse(localStorage.getItem('usuarioActivo'));
-
-    if (!usuario) {
-      alert('Debes iniciar sesión para comprar.');
-      navigate('/login');
-      return;
-    }
-
+  const handleBuy = async () => {
     if (quantityToBuy <= 0) {
       alert('La cantidad a comprar debe ser mayor que cero.');
       return;
@@ -42,19 +55,21 @@ export default function ActionDetail() {
       return;
     }
 
-    const comprasPrevias = JSON.parse(localStorage.getItem('compras')) || [];
+    try {
+      const data = await callApi({
+        method: 'post',
+        url: `/buy`,
+        data: {
+          symbol: action.symbol,
+          quantity: quantityToBuy,
+          userid: user.sub
+        }
+      });
+      console.log('Action data:', data);
 
-    const nuevaCompra = {
-      username: usuario.username,
-      symbol: action.symbol,
-      price: action.price,
-      quantity: quantityToBuy,
-      status: "ACEPTADA",
-      timestamp: new Date().toISOString()
-    };
-
-    const nuevasCompras = [...comprasPrevias, nuevaCompra];
-    localStorage.setItem('compras', JSON.stringify(nuevasCompras));
+    } catch (error) {
+      console.error('Error al comprar la acción:', error);
+    }
 
     navigate('/purchases');
   };
@@ -69,7 +84,7 @@ export default function ActionDetail() {
         <p><strong>Symbol:</strong> {action.symbol}</p>
         <p><strong>Nombre corto:</strong> {action.shortName}</p>
         <p><strong>Nombre largo:</strong> {action.longName}</p>
-        <p><strong>Precio actual:</strong> ${action.price.toLocaleString()}</p>
+        <p><strong>Precio actual:</strong> ${action.price}</p>
         <p><strong>Cantidad disponible:</strong> {action.quantity}</p>
         <p><strong>Última actualización:</strong> {new Date(action.timestamp).toLocaleString()}</p>
 
