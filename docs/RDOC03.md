@@ -1,3 +1,7 @@
+# Documentación de Backend --- LegitBusiness
+
+Por terminar...
+
 # Documentación de Frontend --- LegitBusiness
 
 Este frontend implementa la interfaz de usuario para el sistema de compra de acciones de LegitBusiness. El proyecto fue desarrollado usando **React** + **Vite**, **JavaScript** + **SWC**, estilizado mediante **CSS Modules** + **Open Props**.
