@@ -1,10 +1,15 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
+import { useApi } from '../services/callApi';
 import styles from './ActionList.module.css';
-import mockStocks from '../data/mockStocks.json';
+// import mockStocks from '../data/mockStocks.json';
 import Navbar from '../components/Navbar';
 
 export default function ActionList() {
+  const { callApi } = useApi();
+  const { isAuthenticated, isLoading } = useAuth0();
+  const [stocks, setStocks] = useState([]);
   const navigate = useNavigate();
   const itemsPerPage = 9;
 
@@ -20,6 +25,21 @@ export default function ActionList() {
     quantityValue: '',
     timestamp: ''
   });
+
+  useEffect(() => {
+    async function fetchStocks() {
+      try {
+        const data = await callApi({ method: 'get', url: '/stocks' });
+        setStocks(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    if (!isLoading && isAuthenticated) {
+      fetchStocks();
+    }
+  }, [isLoading, isAuthenticated, callApi]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -54,7 +74,12 @@ export default function ActionList() {
     });
   };
 
-  const filteredStocks = useMemo(() => applyFilters(mockStocks), [filters]);
+  const filteredStocks = useMemo(() => {
+    return applyFilters(stocks, filters);
+  }, [stocks, filters]);
+
+
+  // const filteredStocks = useMemo(() => applyFilters(mockStocks), [filters]);
   const totalPages = Math.ceil(filteredStocks.length / itemsPerPage);
   const paginatedStocks = filteredStocks.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
