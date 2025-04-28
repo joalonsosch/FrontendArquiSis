@@ -49,28 +49,30 @@ Esto instalará todos los paquetes necesarios del backend.
 Crear un archivo `.env` en la raíz del proyecto con el siguiente contenido:
 
 ```env
-# Api configuration 
+#Api configuration
 API_PORT_0=3000
 API_PORT_1=3001
 API_PORT_2=3002
 API_PORT_3=3003
 API_APP_URL=http://api:3000/
 
-# Frontend configuration 
+#Frontend configuration
 FRONTEND_APP_URL=http://frontend:3004/
 
-# Auth0 configuration 
+#Auth0 configuration
 AUTH0_DOMAIN=dev-b0sco3vgffwtqupv.us.auth0.com
 AUTH0_CLIENT_ID=64fna5gIxldoHISZpzhK9nxCOoNzU6Pb
-AUTH0_AUDIENCE=https://dev-b0sco3vgffwtqupv.us.auth0.com/api/v2/
+AUTH0_AUDIENCE=https://api.nacevedom.me/
 
-# Postgres Database Configuration 
+#Postgres Database Configuration
 POSTGRES_HOST=postgres
 POSTGRES_USER=iic2173
 POSTGRES_PASSWORD=ArquiSis2173
 POSTGRES_NAME=iic2173_db_2025_1
 
-# Broker configuration 
+#Broker configuration
+BROKER_UPDATE_TOPIC =stocks/updates
+BROKER_REQUEST_TOPIC =stocks/requests
 GROUP_ID=19
 BROKER_HOST=broker.iic2173.org
 BROKER_PORT=9000
@@ -222,10 +224,10 @@ Crear un archivo `.env` en la raíz del proyecto con el siguiente contenido:
 BACKEND_DOMAIN=https://nacevedom.me/
 
 # Auth0 Configuration
-VITE_BACKEND_DOMAIN=http://localhost:3000/
+VITE_BACKEND_DOMAIN=https://api.nacevedom.me/
 VITE_AUTH0_DOMAIN=dev-b0sco3vgffwtqupv.us.auth0.com
 VITE_AUTH0_CLIENT_ID=64fna5gIxldoHISZpzhK9nxCOoNzU6Pb
-VITE_AUTH0_AUDIENCE=https://dev-b0sco3vgffwtqupv.us.auth0.com/api/v2/
+VITE_AUTH0_AUDIENCE=https://api.nacevedom.me/
 ```
 
 > ⚡ Nota:
