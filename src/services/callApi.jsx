@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 
-const API_BASE = 'https://api.nacevedom.me';
+const API_BASE = import.meta.env.VITE_BACKEND_DOMAIN || 'http://localhost:3000';
 
 export function useApi() {
   const { getAccessTokenSilently } = useAuth0();
