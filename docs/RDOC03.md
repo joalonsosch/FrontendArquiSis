@@ -220,14 +220,10 @@ npm install
 Crear un archivo `.env` en la raíz del proyecto con el siguiente contenido:
 
 ```env
-# Backend Configuration
-BACKEND_DOMAIN=https://nacevedom.me/
-
-# Auth0 Configuration
 VITE_BACKEND_DOMAIN=https://api.nacevedom.me/
 VITE_AUTH0_DOMAIN=dev-b0sco3vgffwtqupv.us.auth0.com
 VITE_AUTH0_CLIENT_ID=64fna5gIxldoHISZpzhK9nxCOoNzU6Pb
-VITE_AUTH0_AUDIENCE=https://api.nacevedom.me/
+VITE_AUTH0_AUDIENCE=https://dev-b0sco3vgffwtqupv.us.auth0.com/api/v2/
 ```
 
 > ⚡ Nota:
