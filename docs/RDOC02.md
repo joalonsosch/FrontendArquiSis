@@ -15,7 +15,7 @@ Dado que la instalación automática falló, se procedió a instalar el agente m
 
 ```bash
 # Agregar License Key correcta
-echo "license_key: 8c68fb15b1e614ac96934828b3aacd8eFFFFNRAL" | sudo tee /etc/newrelic-infra.yml
+echo "license_key: ****************************" | sudo tee /etc/newrelic-infra.yml
 
 # Agregar repositorio oficial
 curl -o- https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg | sudo gpg --dearmor -o /usr/share/keyrings/newrelic-infra-archive-keyring.gpg
@@ -58,7 +58,7 @@ cat <<EOF > newrelic.js
 'use strict'
 exports.config = {
   app_name: ['LegitBusiness Backend'],
-  license_key: '8c68fb15b1e614ac96934828b3aacd8eFFFFNRAL',
+  license_key: '**************************',
   logging: {
     level: 'info',
   },
