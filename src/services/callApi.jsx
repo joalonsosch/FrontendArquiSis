@@ -2,6 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 
 const API_BASE = import.meta.env.VITE_BACKEND_DOMAIN || 'http://localhost:3000';
+console.log('API_BASE:', API_BASE);
 
 export function useApi() {
   const { getAccessTokenSilently } = useAuth0();
