@@ -16,14 +16,11 @@ El sitio web está disponible de manera segura utilizando HTTPS a través de Clo
 
 ---
 
-## 💻 Cómo correr el Frontend en Ambiente Local (Desarrollo)
-
-Para levantar la aplicación de forma local, seguir los siguientes pasos:
+## 🐳 Cómo correr el Frontend con Docker (Desarrollo)
 
 ### 1. Requisitos
 
-- Tener instalado **Node.js** (versión 18 o superior recomendada).
-- Tener instalado **npm** (v10 o superior).
+- Tener instalado **Docker** y **Docker Compose**.
 
 ### 2. Clonar el repositorio
 
@@ -34,19 +31,14 @@ cd FrontendArquiSis
 
 *(Reemplazar `[URL-del-repo-en-GitHub]` por el enlace real de tu repositorio.)*
 
-### 3. Instalar dependencias
+### 3. Levantar la aplicación
 
 ```bash
-npm install
+docker compose up --build
 ```
 
-### 4. Correr la aplicación
+Esto construirá y levantará el contenedor de desarrollo del frontend.
 
-```bash
-npm run dev
-```
-
-Esto levantará el servidor de desarrollo de Vite.  
 La aplicación quedará disponible en:
 
 - [http://localhost:5173/](http://localhost:5173/)
@@ -66,7 +58,6 @@ FrontendArquiSis/
 │   ├── router/              # Configuración de rutas (AppRouter.jsx)
 │   ├── views/               # Vistas principales (LandingPage, LogIn, SignIn, etc.)
 │   └── data/                # Mock data (por ejemplo, stocks de prueba)
-├── .env                     # Variables de entorno para configuración local
 ├── package.json             # Definición de dependencias y scripts
 ├── vite.config.js           # Configuración de Vite
 └── README.md                # Documentación principal del proyecto
