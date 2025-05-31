@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import styles from './Navbar.module.css';
+import { JobMasterStatus } from "./JobMasterStatus";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ export default function Navbar() {
         <button onClick={handleLogout} className={styles.navButton}>
           Cerrar sesión
         </button>
+        <JobMasterStatus />
       </div>
     </nav>
   );

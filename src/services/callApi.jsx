@@ -23,6 +23,15 @@ export function useApi() {
   return { callApi };
 }
 
+export async function checkJobMasterStatus() {
+  try {
+    const res = await fetch(import.meta.env.VITE_JOBMASTER_URL + "/heartbeat");
+    const data = await res.json();
+    return data === true || data.alive === true;
+  } catch (err) {
+    return false;
+  }
+}
 
 // EJEMPLO DE USO:
 
