@@ -49,4 +49,3 @@ Este pipeline cumple plenamente con **RNF06**, ya que:
 - Se sube la nueva versión al bucket de S3.
 - Se limpia la caché de CloudFront para asegurar visibilidad inmediata.
 - Está automatizado y se ejecuta en cada push al main.
-
