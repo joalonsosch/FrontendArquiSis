@@ -91,7 +91,7 @@ export default function EstimationStatus({ jobId, symbol , onTotalGlobalValue })
     intervalIdRef.current = setInterval(fetchEstimationStatus, 5000);
 
 
-  }, [jobId, symbol, callApi]);
+  }, []);
 
   if (status === "no-job-id") {
     return <p>No se encontró Job ID para la estimación de {symbol}.</p>;

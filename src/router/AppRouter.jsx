@@ -9,6 +9,8 @@ import ActionDetail from '../views/ActionDetail';
 import ActionPurchases from '../views/ActionPurchases';
 import Wallet from '../views/Wallet';
 import ErrorPage from '../views/ErrorPage';
+import WebpayForm from '../views/WebpayForm';
+import PaymentResponse from '../views/PaymentResponse';
 
 import ProtectedRoute from '../components/ProtectedRoute';
 
@@ -60,7 +62,8 @@ export default function AppRouter() {
             </ProtectedRoute>
           }
         />
-
+        <Route path="/webpay/form" element={<WebpayForm />} />
+        <Route path="/payment-response" element={<PaymentResponse />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>

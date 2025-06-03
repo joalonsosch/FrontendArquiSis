@@ -75,7 +75,7 @@ export default function ActionDetail() {
         const buys = await callApi({ method: 'get', url: `/buy/${user.sub}` });
 
         const match = buys.find(b => b.request_id === request_id);
-        if (match?.status === 'ACCEPTED') {
+        if (match?.status === 'ACCEPTED' || match?.status === 'RESERVED') {
           buyConfirmed = true;
           break;
         }
@@ -137,7 +137,7 @@ export default function ActionDetail() {
             className={styles.input}
           />
           <button onClick={handleBuy} className={styles.button}>
-            Comprar
+            Reservar
           </button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useRef } from 'react';
-import { useAuth0 } from '@auth0/auth0-react'; // ✓ Usar Auth0 en lugar de localStorage
+import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '../services/callApi';
 import styles from './UserHub.module.css';
@@ -12,12 +12,22 @@ export default function UserHub() {
   const navigate = useNavigate();
 
   const handleWallet = useCallback(async () => {
-    if (walletCreated.current) return;
-    walletCreated.current = true; 
+    if (walletCreated.current) {
+      console.log('🔁 Wallet ya fue creada o intento previo.');
+      return;
+    }
+
+    walletCreated.current = true;
+
+    if (!user?.sub) {
+      console.warn('🚨 No se encontró user.sub. No se puede crear wallet.');
+      return;
+    }
 
     try {
-      console.log('Creating wallet for user:', user.sub);
-      await callApi({
+      console.log('🪪 Usuario autenticado. Creando wallet para:', user.sub);
+
+      const response = await callApi({
         method: 'post',
         url: '/wallet',
         data: {
@@ -26,26 +36,29 @@ export default function UserHub() {
         }
       });
 
+      console.log('✅ Wallet creada:', response);
     } catch (error) {
-      console.error(error);
+      console.error('❌ Error al crear la wallet:', error);
     }
   }, [callApi, user?.sub]);
 
   useEffect(() => {
-    console.log('isLoading:', isLoading);
+    console.log('📌 useEffect 1 - Estado de Auth:', { isLoading, isAuthenticated, user });
+
     if (!isLoading && isAuthenticated && user) {
       handleWallet();
     }
   }, [isLoading, isAuthenticated, user, handleWallet]);
 
   useEffect(() => {
+    console.log('📌 useEffect 2 - Verificando si redirigir al login');
     if (!isLoading && !isAuthenticated) {
-      loginWithRedirect({ appState: { returnTo: '/home' } }); // ✓ Dispara login de Auth0
+      loginWithRedirect({ appState: { returnTo: '/home' } });
     }
   }, [isLoading, isAuthenticated, loginWithRedirect]);
 
   if (isLoading || !isAuthenticated) {
-    return <div>Cargando...</div>; // ✓ Mostrar carga hasta autenticar
+    return <div>Cargando...</div>;
   }
 
   return (
@@ -55,7 +68,7 @@ export default function UserHub() {
         <h2 className={styles.welcome}>Bienvenido/a</h2>
         <h2 className={styles.username}>
           <span className={styles.userIcon}>👤</span>
-          {user.name || user.email} {/* ✓ Mostrar nombre o email de Auth0 */}
+          {user.name || user.email}
         </h2>
         <p className={styles.question}>¿Qué movimiento/s quieres hacer hoy?</p>
 

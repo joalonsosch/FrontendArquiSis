@@ -39,7 +39,7 @@ export default function ActionList() {
     if (!isLoading && isAuthenticated) {
       fetchStocks();
     }
-  }, [isLoading, isAuthenticated, callApi]);
+  }, []);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
