@@ -9,6 +9,7 @@ import ActionDetail from '../views/ActionDetail';
 import ActionPurchases from '../views/ActionPurchases';
 import Wallet from '../views/Wallet';
 import ErrorPage from '../views/ErrorPage';
+import WebpayReturn from '../views/WebpayReturn';
 
 import ProtectedRoute from '../components/ProtectedRoute';
 
@@ -62,6 +63,10 @@ export default function AppRouter() {
         />
 
         <Route path="*" element={<ErrorPage />} />
+
+        <Route 
+        path="/transactions/return" 
+        element={<WebpayReturn />} />
       </Routes>
     </Router>
   );
