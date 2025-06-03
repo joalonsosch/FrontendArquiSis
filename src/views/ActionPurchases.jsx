@@ -3,11 +3,20 @@ import styles from './ActionPurchases.module.css';
 import Navbar from '../components/Navbar';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useApi } from '../services/callApi';
+import EstimationStatus from '../components/EstimationStatus';
 
 export default function ActionPurchases() {
   const { callApi } = useApi();
   const [compras, setCompras] = useState([]);
   const { user, isAuthenticated, isLoading } = useAuth0();
+
+  const [totalGlobalValue, setTotalGlobalValue] = useState(null);
+
+
+  const handleTotalGlobalValue = (value) => {
+    setTotalGlobalValue(value);
+  };
+
 
   useEffect(() => {
     async function fetchBuys() {
@@ -17,7 +26,6 @@ export default function ActionPurchases() {
           url: `/buy/${user.sub}`,
         });
         setCompras(data);
-        console.log('Buys data:', data);
       } catch (error) {
         console.error(error);
       }
@@ -26,7 +34,7 @@ export default function ActionPurchases() {
     if (!isLoading && isAuthenticated) {
       fetchBuys();
     }
-  }, [isLoading, isAuthenticated, callApi, user]);
+  }, []);
 
   if (isLoading) {
     return <div>Cargando historial de compras…</div>;
@@ -40,6 +48,11 @@ export default function ActionPurchases() {
       <Navbar />
       <div className={styles.container}>
         <h2>Historial de compras de {user.name}</h2>
+
+        {totalGlobalValue !== null && (
+          <h4><strong>Ganancia total estimada:</strong> ${totalGlobalValue.toFixed(2)}</h4>
+        )}
+
         {compras.length === 0 ? (
           <p>No hay compras registradas.</p>
         ) : (
@@ -55,6 +68,11 @@ export default function ActionPurchases() {
                     {compra.status}
                   </span>
                 </p>
+                <EstimationStatus
+                  jobId={localStorage.getItem("jobId")}
+                  symbol={compra.symbol}
+                  onTotalGlobalValue={index === 0 ? handleTotalGlobalValue : undefined}
+                />
               </li>
             ))}
           </ul>
