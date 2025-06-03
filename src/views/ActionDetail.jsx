@@ -45,6 +45,8 @@ export default function ActionDetail() {
   }
 
   const handleBuy = async () => {
+    console.log('handleBuy ejecutado');
+    
     if (quantityToBuy <= 0) {
       alert('La cantidad a comprar debe ser mayor que cero.');
       return;
@@ -66,9 +68,10 @@ export default function ActionDetail() {
     //    }
     //  });
     //  console.log('Action data:', data);
-
+  
     try {
-    const data = await callApi({
+      //console.log('Comprando acción:', action.symbol, 'Cantidad:', quantityToBuy);
+      const data = await callApi({
       method: 'post',
       url: `/transactions/init`,
       data: {

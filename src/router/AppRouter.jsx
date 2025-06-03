@@ -47,9 +47,9 @@ export default function AppRouter() {
         <Route
           path="/purchases"
           element={
-            <ProtectedRoute>
+            /*<ProtectedRoute> */
               <ActionPurchases />
-            </ProtectedRoute>
+            /*<ProtectedRoute> */
           }
         />
         <Route

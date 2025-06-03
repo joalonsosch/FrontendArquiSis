@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_BACKEND_DOMAIN || 'http://localhost:3000';
+const API_BASE = import.meta.env.VITE_BACKEND_DOMAIN;
 console.log('API_BASE:', API_BASE);
 
 export function useApi() {
@@ -9,7 +9,7 @@ export function useApi() {
 
   async function callApi(options) {
     const token = await getAccessTokenSilently();
-    console.log('Token:', token);
+    //console.log('Token:', token);
     const response = await axios({
       baseURL: API_BASE,
       headers: {
@@ -25,7 +25,7 @@ export function useApi() {
 
 export async function checkJobMasterStatus() {
   try {
-    const res = await fetch(import.meta.env.VITE_JOBMASTER_URL + "/heartbeat");
+    const res = await fetch(import.meta.env.VITE_JOBMASTER_URL + "heartbeat");
     const data = await res.json();
     return data === true || data.alive === true;
   } catch (err) {
