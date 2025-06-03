@@ -21,7 +21,6 @@ export default function ActionDetail() {
           url: `/stocks/${symbol}`
         });
         setAction(data);
-        console.log('Action data:', data);
       } catch (error) {
         console.error(error);
       }
@@ -30,7 +29,7 @@ export default function ActionDetail() {
     if (!isLoading && isAuthenticated) {
       fetchStocks();
     }
-  }, [isLoading, isAuthenticated, callApi, symbol]);
+  }, []);
 
   if (!action) {
     return (
@@ -65,7 +64,45 @@ export default function ActionDetail() {
           userid: user.sub
         }
       });
-      console.log('Action data:', data);
+
+      const { request_id } = data;
+      
+      // Esperar a que se confirme la compra
+      let buyConfirmed = false;
+      for (let i = 0; i < 10; i++) { // intentos durante ~10 segundos
+        const buys = await callApi({ method: 'get', url: `/buy/${user.sub}` });
+
+        const match = buys.find(b => b.request_id === request_id);
+        if (match?.status === 'ACCEPTED') {
+          buyConfirmed = true;
+          break;
+        }
+
+        await new Promise(res => setTimeout(res, 1000)); // esperar 1 segundo
+      }
+
+      if (!buyConfirmed) {
+        alert("La compra aún no fue aceptada. Intenta más tarde.");
+        return;
+      }
+
+      // Lanzar el job de estimación
+    const response = await callApi({
+      method: 'post',
+      url: '/estimations',
+      data: { userId: user.sub },
+    });
+
+    // Check if the response actually contains a jobId
+    if (response && response.jobId) {
+      const newJobId = response.jobId;
+      const currentStoredJobId = localStorage.getItem("jobId");
+
+      // Only update localStorage if the new jobId is different or if there's no jobId stored yet
+      if (currentStoredJobId !== newJobId) {
+        localStorage.setItem("jobId", newJobId);
+      }
+    }
 
     } catch (error) {
       console.error('Error al comprar la acción:', error);
