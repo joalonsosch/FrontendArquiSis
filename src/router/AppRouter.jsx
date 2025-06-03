@@ -31,17 +31,17 @@ export default function AppRouter() {
         <Route
           path="/actions"
           element={
-            <ProtectedRoute>
+            /*<ProtectedRoute> */
               <ActionList />
-            </ProtectedRoute>
+            /*<ProtectedRoute> */
           }
         />
         <Route
           path="/actions/:symbol"
           element={
-            <ProtectedRoute>
+            /*<ProtectedRoute> */
               <ActionDetail />
-            </ProtectedRoute>
+            /*<ProtectedRoute> */
           }
         />
         <Route
@@ -55,9 +55,9 @@ export default function AppRouter() {
         <Route
           path="/wallet"
           element={
-            <ProtectedRoute>
+            /*<ProtectedRoute> */
               <Wallet />
-            </ProtectedRoute>
+            /*</ProtectedRoute> */
           }
         />
 
