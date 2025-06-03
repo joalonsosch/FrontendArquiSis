@@ -1,66 +1,72 @@
-# Documentación de Frontend --- LegitBusiness
+# Frontend - LegitBusiness
 
-Este frontend implementa la interfaz de usuario para el sistema de compra de acciones de LegitBusiness. El proyecto fue desarrollado usando **React** + **Vite**, **JavaScript** + **SWC**, estilizado mediante **CSS Modules** + **Open Props**.
+Este repositorio contiene la interfaz de usuario para la plataforma de compra y venta de acciones **LegitBusiness**.
 
-## ✈️ Cómo correr el Frontend en Ambiente No-Local (Producción)
-
-El frontend de LegitBusiness fue desplegado utilizando **AWS S3** + **AWS CloudFront**.
-
-Para acceder a la aplicación en ambiente de producción:
-
-- **URL pública**:  
-  [https://d2o8rj45ls9yf5.cloudfront.net/](https://d2o8rj45ls9yf5.cloudfront.net/)
-
-No es necesario instalar nada localmente.  
-El sitio web está disponible de manera segura utilizando HTTPS a través de CloudFront.
+El frontend fue construido utilizando **React** + **Vite**, con estilos en **CSS Modules** y **Open Props**.
 
 ---
 
-## 🐳 Cómo correr el Frontend con Docker (Desarrollo)
+## 🌐 Producción
 
-### 1. Requisitos
+El sitio se encuentra desplegado públicamente usando **AWS S3** y **AWS CloudFront**.
 
-- Tener instalado **Docker** y **Docker Compose**.
+- **URL pública**: [https://d2o8rj45ls9yf5.cloudfront.net/](https://d2o8rj45ls9yf5.cloudfront.net/)
 
-### 2. Clonar el repositorio
+Este sitio es estático, accesible desde cualquier navegador moderno, sin necesidad de instalación local.
+
+---
+
+## 🧪 Desarrollo local con Docker
+
+### Requisitos
+
+- Tener instalado Docker y Docker Compose
+
+### Pasos
 
 ```bash
 git clone [URL-del-repo-en-GitHub]
 cd FrontendArquiSis
-```
-
-*(Reemplazar `[URL-del-repo-en-GitHub]` por el enlace real de tu repositorio.)*
-
-### 3. Levantar la aplicación
-
-```bash
 docker compose up --build
 ```
 
-Esto construirá y levantará el contenedor de desarrollo del frontend.
-
-La aplicación quedará disponible en:
+Esto levantará la aplicación de desarrollo en:
 
 - [http://localhost:5173/](http://localhost:5173/)
 
 ---
 
-## 🧹 Estructura General del Proyecto
+## 🧾 Requisitos cumplidos
 
-La estructura general del proyecto frontend es la siguiente:
+Este frontend cumple con los siguientes requisitos de la entrega E2:
+
+| Tipo   | Código   | Descripción                                      |
+|--------|----------|--------------------------------------------------|
+| ✅ RF03 | Flujo WebPay            | Inicia pago, redirige según resultado             |
+| ✅ RNF02 | UI de estados WebPay    | Muestra mensaje claro según resultado            |
+| ✅ RNF06 | CI/CD Frontend          | Sync a S3 + invalidación de CloudFront           |
+
+---
+
+## 📁 Estructura del Proyecto
 
 ```
 FrontendArquiSis/
 ├── public/                  # Archivos públicos
 ├── src/
-│   ├── assets/              # Imágenes, íconos y recursos estáticos
-│   ├── components/          # Componentes reutilizables (Navbar, botones, etc.)
-│   ├── router/              # Configuración de rutas (AppRouter.jsx)
-│   ├── views/               # Vistas principales (LandingPage, LogIn, SignIn, etc.)
-│   └── data/                # Mock data (por ejemplo, stocks de prueba)
-├── package.json             # Definición de dependencias y scripts
+│   ├── assets/              # Imágenes e íconos
+│   ├── components/          # Componentes reutilizables
+│   ├── router/              # Definición de rutas
+│   ├── views/               # Páginas principales
+│   └── data/                # Datos simulados (mock)
+├── package.json             # Dependencias
 ├── vite.config.js           # Configuración de Vite
-└── README.md                # Documentación principal del proyecto
+└── README.md                # Este archivo
 ```
 
 ---
+
+## 🛠️ Notas adicionales
+
+- Las vistas se conectan con el backend mediante endpoints REST y simulan respuestas con mock data hasta completar la integración.
+- Las credenciales y secretos no se encuentran en este repositorio. Usamos variables de entorno para producción.
