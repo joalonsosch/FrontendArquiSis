@@ -61,12 +61,14 @@ export default function ActionDetail() {
         data: {
           symbol: action.symbol,
           quantity: quantityToBuy,
-          userid: user.sub
+          userid: user.sub,
+          user_name: user.name,
+          user_email: user.email
         }
       });
 
       const { request_id } = data;
-      
+
       // Esperar a que se confirme la compra
       let buyConfirmed = false;
       for (let i = 0; i < 10; i++) { // intentos durante ~10 segundos

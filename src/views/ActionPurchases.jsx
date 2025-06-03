@@ -73,6 +73,9 @@ export default function ActionPurchases() {
                   symbol={compra.symbol}
                   onTotalGlobalValue={index === 0 ? handleTotalGlobalValue : undefined}
                 />
+                <a href={compra.receipt_url} target="_blank" rel="noopener noreferrer">
+                  Ver recibo
+                </a>
               </li>
             ))}
           </ul>
