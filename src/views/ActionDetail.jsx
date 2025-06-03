@@ -55,23 +55,39 @@ export default function ActionDetail() {
       return;
     }
 
+    //try {
+    //  const data = await callApi({
+    //    method: 'post',
+    //    url: `/buy`,
+    //    data: {
+    //      symbol: action.symbol,
+    //      quantity: quantityToBuy,
+    //      userid: user.sub
+    //    }
+    //  });
+    //  console.log('Action data:', data);
+
     try {
-      const data = await callApi({
-        method: 'post',
-        url: `/buy`,
-        data: {
-          symbol: action.symbol,
-          quantity: quantityToBuy,
-          userid: user.sub
-        }
-      });
-      console.log('Action data:', data);
+    const data = await callApi({
+      method: 'post',
+      url: `/transactions/init`,
+      data: {
+        amount: action.price * quantityToBuy,
+        userid: user.sub,
+        buyOrder: `${action.symbol}-${Date.now()}`,
+        symbol: action.symbol,
+        quantity: quantityToBuy,
+      }
+    });
+
+    // Redirige al usuario a Webpay
+    window.location.href = `${data.url}?token_ws=${data.token}`;
 
     } catch (error) {
       console.error('Error al comprar la acción:', error);
     }
 
-    navigate('/purchases');
+    //navigate('/purchases');
   };
 
   return (
