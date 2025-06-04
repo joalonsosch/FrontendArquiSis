@@ -1,49 +1,49 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function WebpayForm() {
-    const location = useLocation();
-    const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-    const { token, url, request_id } = location.state || {};
+  const { token, url, request_id } = location.state || {};
 
-        useEffect(() => {
-        if (!token || !url || !request_id) {
-            alert('Información de pago no disponible.');
-            navigate('/');
-        } else {
-            // Simula el auto-submit con redirección personalizada
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = url;
+  useEffect(() => {
+    if (!token || !url || !request_id) {
+      alert("Información de pago no disponible.");
+      navigate("/");
+    } else {
+      // Limpiar cualquier estado de procesamiento anterior
+      const oldRequestId = localStorage.getItem("request_id");
+      if (oldRequestId) {
+        localStorage.removeItem(`processing_${oldRequestId}`);
+      }
 
-            const tokenInput = document.createElement('input');
-            tokenInput.type = 'hidden';
-            tokenInput.name = 'token_ws';
-            tokenInput.value = token;
-            form.appendChild(tokenInput);
+      // Limpiar estado de pago anterior
+      localStorage.removeItem("payment_status");
 
-            document.body.appendChild(form);
+      // Guardar el nuevo request_id
+      localStorage.setItem("request_id", request_id);
 
-            // Guarda el request_id temporalmente para usarlo luego
-            sessionStorage.setItem('request_id', request_id);
+      // Crear y enviar el formulario
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = url;
 
-            form.submit();
-        }
-        }, []);
+      const tokenInput = document.createElement("input");
+      tokenInput.type = "hidden";
+      tokenInput.name = "token_ws";
+      tokenInput.value = token;
+      form.appendChild(tokenInput);
 
-    return (
-        <div>
-        <h2>Redirigiendo a WebPay...</h2>
+      document.body.appendChild(form);
+      form.submit();
+    }
+  }, [token, url, request_id, navigate]);
 
-        <form
-            id="webpay-form"
-            method="POST"
-            action={url}
-            style={{ display: 'none' }}
-        >
-            <input type="hidden" name="token_ws" value={token} />
-        </form>
-        </div>
-    );
+  return (
+    <div>
+      <h2>Redirigiendo a WebPay...</h2>
+      <p>Por favor espere, está siendo redirigido al sistema de pago...</p>
+    </div>
+  );
 }

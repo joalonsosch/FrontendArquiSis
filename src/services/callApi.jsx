@@ -2,14 +2,14 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 
 const API_BASE = 'http://localhost:3000/';
-console.log('API_BASE:', API_BASE);
+// console.log('API_BASE:', API_BASE);
 
 export function useApi() {
   const { getAccessTokenSilently } = useAuth0();
 
   async function callApi(options) {
     const token = await getAccessTokenSilently();
-    console.log('Token:', token);
+    // console.log('Token:', token);
     const response = await axios({
       baseURL: API_BASE,
       headers: {

@@ -121,9 +121,12 @@ const handlePagar = async (compra) => {
                   <button onClick={() => handlePagar(compra)} className={styles.button}>Ir a pagar</button>
                 )}
 
-                <a href={compra.receipt_url} target="_blank" rel="noopener noreferrer">
-                  Ver recibo
-                </a>
+                {compra.status === 'ACCEPTED' && (
+                  <a href={compra.receipt_url} target="_blank" rel="noopener noreferrer">
+                    Ver recibo
+                  </a>
+                )}
+
               </li>
             ))}
           </ul>
