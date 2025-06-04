@@ -6,7 +6,7 @@ function PaymentPage({ buyOrder, sessionId, amount }) {
 
     const handleCreateTransaction = async () => {
         try {
-        const response = await axios.post('http://localhost:3000/webpay/create', {
+        const response = await axios.post(import.meta.env.VITE_BACKEND_DOMAIN + '/webpay/create', {
             buyOrder,
             sessionId,
             amount
