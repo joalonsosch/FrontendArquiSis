@@ -7,7 +7,13 @@ import Navbar from '../components/Navbar';
 
 export default function UserHub() {
   const { callApi } = useApi();
-  const { isAuthenticated, isLoading, user, loginWithRedirect } = useAuth0();
+  const {
+    isAuthenticated,
+    isLoading,
+    user,
+    loginWithRedirect,
+    getAccessTokenSilently
+  } = useAuth0();
   const walletCreated = useRef(false);
   const navigate = useNavigate();
 
@@ -56,6 +62,23 @@ export default function UserHub() {
       loginWithRedirect({ appState: { returnTo: '/home' } });
     }
   }, [isLoading, isAuthenticated, loginWithRedirect]);
+
+  useEffect(() => {
+    const inspectToken = async () => {
+      try {
+        const token = await getAccessTokenSilently();
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const roles = payload['https://arquisis-back.com/roles'];
+        console.log('🎭 Roles del usuario:', roles);
+      } catch (error) {
+        console.error('❌ Error obteniendo token o roles:', error);
+      }
+    };
+
+    if (!isLoading && isAuthenticated) {
+      inspectToken();
+    }
+  }, [isLoading, isAuthenticated, getAccessTokenSilently]);
 
   if (isLoading || !isAuthenticated) {
     return <div>Cargando...</div>;
