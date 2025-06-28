@@ -27,6 +27,9 @@ export default function Navbar() {
         <button onClick={() => navigate('/purchases')} className={styles.navButton}>
           Historial
         </button>
+        <button onClick={() => navigate('/admin-buy')} className={styles.navButton}>
+          (Solo admin) Comprar stocks a broker
+        </button>
         <button onClick={handleLogout} className={styles.navButton}>
           Cerrar sesión
         </button>
