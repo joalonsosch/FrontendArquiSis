@@ -1,0 +1,72 @@
+@import 'open-props/open-props.min.css';
+@import 'open-props/normalize.min.css';
+
+.pageWrapper {
+  background-color: var(--surface-1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 600px;
+  margin: var(--size-10) auto;
+  background-color: var(--surface-2);
+  padding: var(--size-6);
+  border-radius: var(--radius-3);
+  text-align: center;
+  box-shadow: var(--shadow-3);
+  color: var(--text-1);
+  font-family: 'OCR A Std', monospace;
+}
+
+h2 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: var(--font-size-fluid-2);
+  margin-bottom: var(--size-4);
+  color: var(--text-1);
+}
+
+.label,
+.question {
+  font-size: 1rem;
+  margin-bottom: var(--size-2);
+  color: var(--text-2);
+  display: block;
+}
+
+.input {
+  padding: var(--size-2);
+  font-size: 1rem;
+  border-radius: var(--radius-2);
+  border: 1px solid var(--border-2);
+  background-color: var(--surface-3);
+  color: var(--text-1);
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto var(--size-4);
+  display: block;
+}
+
+.button {
+  padding: var(--size-2) var(--size-4);
+  background-color: var(--link);
+  color: white;
+  border: none;
+  border-radius: var(--radius-2);
+  cursor: pointer;
+  font-family: 'OCR A Std', monospace;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-top: var(--size-3);
+}
+
+.button:hover {
+  background-color: var(--link-hover);
+}
+
+.feedback {
+  margin-top: var(--size-4);
+  color: var(--text-2);
+  font-size: 0.95rem;
+}
