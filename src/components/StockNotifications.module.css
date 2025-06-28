@@ -1,0 +1,101 @@
+.notificationsContainer {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 350px;
+}
+
+.notification {
+  background: var(--surface-1);
+  border: 2px solid var(--border-1);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transform: translateX(100%);
+  transition: all 0.3s ease;
+  font-family: 'OCR A Std', monospace;
+}
+
+.notification.show {
+  transform: translateX(0);
+}
+
+.notification.hide {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.notification.quantity_updated {
+  border-left: 4px solid var(--orange-6);
+}
+
+.notification.data_updated {
+  border-left: 4px solid var(--blue-6);
+}
+
+.notification.stock_updated {
+  border-left: 4px solid var(--green-6);
+}
+
+.content {
+  flex: 1;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  color: var(--text-1);
+}
+
+.message {
+  font-size: 0.8rem;
+  color: var(--text-2);
+  margin-bottom: 4px;
+}
+
+.details {
+  font-size: 0.75rem;
+  color: var(--text-2);
+  font-style: italic;
+}
+
+.dismissButton {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-2);
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.dismissButton:hover {
+  background: var(--surface-3);
+  color: var(--text-1);
+}
+
+@media (max-width: 768px) {
+  .notificationsContainer {
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+  
+  .notification {
+    padding: 12px;
+  }
+}

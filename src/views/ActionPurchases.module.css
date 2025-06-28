@@ -58,3 +58,65 @@ h2 {
   color: var(--yellow-5);
   font-weight: bold;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--size-5);
+  flex-wrap: wrap;
+  gap: var(--size-3);
+}
+
+.header h2 {
+  margin: 0;
+  text-align: left;
+  flex: 1;
+}
+
+.updateIndicator {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.pending {
+  color: var(--orange-6);
+  font-weight: bold;
+}
+
+.reserved {
+  color: var(--green-6);
+  font-weight: bold;
+}
+
+.accepted {
+  color: var(--blue-6);
+  font-weight: bold;
+}
+
+.rejected {
+  color: var(--red-6);
+  font-weight: bold;
+}
+
+.payment_validated {
+  color: var(--purple-6);
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .header h2 {
+    text-align: center;
+  }
+}

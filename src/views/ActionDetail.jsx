@@ -4,6 +4,9 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useApi } from '../services/callApi';
 import styles from './ActionDetail.module.css';
 import Navbar from '../components/Navbar';
+import useWebSocket from '../hooks/useWebSocket';
+import BuyNotifications from '../components/BuyNotifications';
+import WebSocketStatus from '../components/WebSocketStatus';
 
 export default function ActionDetail() {
   const [action, setAction] = useState([]);
@@ -12,6 +15,17 @@ export default function ActionDetail() {
   const { symbol } = useParams();
   const navigate = useNavigate();
   const [quantityToBuy, setQuantityToBuy] = useState(1);
+
+  // WebSocket integration
+  const { 
+    isConnected, 
+    buyUpdates, 
+    stockUpdates,
+    clearUpdates, 
+    clearStockUpdates,
+    getLatestStockUpdate,
+    retryCount 
+  } = useWebSocket(isAuthenticated ? user?.sub : null);
 
   useEffect(() => {
     async function fetchStocks() {
@@ -30,6 +44,29 @@ export default function ActionDetail() {
       fetchStocks();
     }
   }, []);
+
+  // Handle real-time stock updates for this specific stock
+  useEffect(() => {
+    if (stockUpdates.length > 0) {
+      const latestUpdate = stockUpdates[stockUpdates.length - 1];
+      
+      // Only update if this is the stock we're viewing
+      if (latestUpdate.symbol === symbol) {
+        setAction(prevAction => ({
+          ...prevAction,
+          // Update fields that might have changed
+          ...(latestUpdate.quantity !== undefined && { quantity: latestUpdate.quantity }),
+          ...(latestUpdate.price !== undefined && { price: latestUpdate.price }),
+          timestamp: latestUpdate.timestamp || prevAction.timestamp
+        }));
+        
+        // Adjust quantityToBuy if it exceeds available quantity
+        if (latestUpdate.quantity !== undefined && quantityToBuy > latestUpdate.quantity) {
+          setQuantityToBuy(Math.max(1, latestUpdate.quantity));
+        }
+      }
+    }
+  }, [stockUpdates, symbol, quantityToBuy]);
 
   if (!action) {
     return (
@@ -113,18 +150,51 @@ export default function ActionDetail() {
     navigate('/purchases');
   };
 
+  const latestStockUpdate = getLatestStockUpdate(symbol);
+  const isRecentlyUpdated = latestStockUpdate && (Date.now() - latestStockUpdate.timestamp < 10000);
+
   return (
     <div className={styles.pageWrapper}>
       <Navbar />
+      
+      {/* WebSocket notifications */}
+      <BuyNotifications 
+        buyUpdates={buyUpdates} 
+        onDismiss={clearUpdates}
+      />
+      
+      <StockNotifications 
+        stockUpdates={stockUpdates.filter(update => update.symbol === symbol)} 
+        onDismiss={clearStockUpdates}
+      />
+      
       <div className={styles.container}>
-        <h2>{action.longName} ({action.symbol})</h2>
+        <div className={styles.header}>
+          <h2>
+            {action.longName} ({action.symbol})
+            {isRecentlyUpdated && (
+              <span className={styles.updateIndicator} title="Stock actualizado recientemente">
+                🔄
+              </span>
+            )}
+          </h2>
+          <WebSocketStatus isConnected={isConnected} retryCount={retryCount} />
+        </div>
 
         <p><strong>ID:</strong> {action.id}</p>
         <p><strong>Symbol:</strong> {action.symbol}</p>
         <p><strong>Nombre corto:</strong> {action.shortName}</p>
         <p><strong>Nombre largo:</strong> {action.longName}</p>
         <p><strong>Precio actual:</strong> ${action.price}</p>
-        <p><strong>Cantidad disponible:</strong> {action.quantity}</p>
+        <p>
+          <strong>Cantidad disponible:</strong> {action.quantity}
+          {action.quantity === 0 && (
+            <span className={styles.outOfStock}> (Agotado)</span>
+          )}
+          {isRecentlyUpdated && (
+            <span className={styles.recentUpdate}> (Actualizado recientemente)</span>
+          )}
+        </p>
         <p><strong>Última actualización:</strong> {new Date(action.timestamp).toLocaleString()}</p>
 
         <div className={styles.buySection}>
@@ -135,9 +205,14 @@ export default function ActionDetail() {
             value={quantityToBuy}
             onChange={(e) => setQuantityToBuy(Number(e.target.value))}
             className={styles.input}
+            disabled={action.quantity === 0}
           />
-          <button onClick={handleBuy} className={styles.button}>
-            Reservar
+          <button 
+            onClick={handleBuy} 
+            className={styles.button}
+            disabled={action.quantity === 0 || quantityToBuy > action.quantity}
+          >
+            {action.quantity === 0 ? 'Agotado' : 'Reservar'}
           </button>
         </div>
       </div>
