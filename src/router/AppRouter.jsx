@@ -11,6 +11,7 @@ import Wallet from '../views/Wallet';
 import ErrorPage from '../views/ErrorPage';
 import WebpayForm from '../views/WebpayForm';
 import PaymentResponse from '../views/PaymentResponse';
+import AdminBuyPage from '../views/AdminBuyPage';
 
 import ProtectedRoute from '../components/ProtectedRoute';
 
@@ -65,6 +66,15 @@ export default function AppRouter() {
         <Route path="/webpay/form" element={<WebpayForm />} />
         <Route path="/payment-response" element={<PaymentResponse />} />
         <Route path="*" element={<ErrorPage />} />
+
+        <Route
+          path="/admin-buy"
+          element={
+            <ProtectedRoute>
+              <AdminBuyPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );
