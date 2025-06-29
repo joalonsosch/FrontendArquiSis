@@ -1,0 +1,154 @@
+.notificationContainer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 400px;
+  pointer-events: none;
+}
+
+.notification {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 12px 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-left: 4px solid #007bff;
+  animation: slideInRight 0.3s ease-out;
+  pointer-events: all;
+  transition: all 0.3s ease;
+}
+
+.notification:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.notificationContent {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.icon {
+  font-size: 24px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+}
+
+.details {
+  flex: 1;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.message {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.submessage {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+.amount {
+  font-size: 12px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.dismissButton {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #999;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 8px;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.dismissButton:hover {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+/* Status-specific styles */
+.pending {
+  border-left-color: #ffc107;
+}
+
+.reserved {
+  border-left-color: #28a745;
+}
+
+.accepted {
+  border-left-color: #17a2b8;
+}
+
+.rejected {
+  border-left-color: #dc3545;
+}
+
+.validated {
+  border-left-color: #6f42c1;
+}
+
+.default {
+  border-left-color: #6c757d;
+}
+
+/* Animation */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .notificationContainer {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+  
+  .notification {
+    padding: 10px 12px;
+  }
+  
+  .title {
+    font-size: 13px;
+  }
+  
+  .message {
+    font-size: 12px;
+  }
+}

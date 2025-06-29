@@ -4,14 +4,25 @@ import { useNavigate } from 'react-router-dom';
 import { useApi } from '../services/callApi';
 import styles from './ActionList.module.css';
 import Navbar from '../components/Navbar';
+import useWebSocket from '../hooks/useWebSocket';
+import StockNotifications from '../components/StockNotifications';
+import WebSocketStatus from '../components/WebSocketStatus';
 
 export default function ActionList() {
   const { callApi } = useApi();
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading, user } = useAuth0();
   const [stocks, setStocks] = useState([]);
   const navigate = useNavigate();
   const itemsPerPage = 9;
 
+  // WebSocket integration
+  const { 
+    isConnected, 
+    stockUpdates, 
+    clearStockUpdates, 
+    getLatestStockUpdate, 
+    retryCount 
+  } = useWebSocket(isAuthenticated ? user?.sub : null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
@@ -40,6 +51,29 @@ export default function ActionList() {
       fetchStocks();
     }
   }, []);
+
+  // Handle real-time stock updates
+  useEffect(() => {
+    if (stockUpdates.length > 0) {
+      const latestUpdate = stockUpdates[stockUpdates.length - 1];
+      
+      // Update the specific stock in the stocks array
+      setStocks(prevStocks => 
+        prevStocks.map(stock => {
+          if (stock.symbol === latestUpdate.symbol) {
+            return {
+              ...stock,
+              // Update fields that might have changed
+              ...(latestUpdate.quantity !== undefined && { quantity: latestUpdate.quantity }),
+              ...(latestUpdate.price !== undefined && { price: latestUpdate.price }),
+              timestamp: latestUpdate.timestamp || stock.timestamp
+            };
+          }
+          return stock;
+        })
+      );
+    }
+  }, [stockUpdates]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -78,16 +112,24 @@ export default function ActionList() {
     return applyFilters(stocks, filters);
   }, [stocks, filters]);
 
-
-  // const filteredStocks = useMemo(() => applyFilters(mockStocks), [filters]);
   const totalPages = Math.ceil(filteredStocks.length / itemsPerPage);
   const paginatedStocks = filteredStocks.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <div className={styles.pageWrapper}>
       <Navbar />
+      
+      {/* WebSocket stock notifications */}
+      <StockNotifications 
+        stockUpdates={stockUpdates} 
+        onDismiss={clearStockUpdates}
+      />
+      
       <div className={styles.container}>
-        <h2 className={styles.title}>Acciones Disponibles</h2>
+        <div className={styles.header}>
+          <h2 className={styles.title}>Acciones Disponibles</h2>
+          <WebSocketStatus isConnected={isConnected} retryCount={retryCount} />
+        </div>
 
         <div className={styles.filters}>
           <input name="id" value={filters.id} onChange={handleFilterChange} placeholder="ID" />
@@ -119,19 +161,37 @@ export default function ActionList() {
         </div>
 
         <div className={styles.grid}>
-          {paginatedStocks.map((stock) => (
-            <div key={stock.id} className={styles.card}>
-              <h3>{stock.symbol} — {stock.shortName}</h3>
-              <p><strong>Precio:</strong> ${stock.price.toLocaleString()}</p>
-              <p><strong>Cantidad disponible:</strong> {stock.quantity}</p>
-              <button
-                className={styles.button}
-                onClick={() => navigate(`/actions/${stock.symbol}`)}
-              >
-                Ver más
-              </button>
-            </div>
-          ))}
+          {paginatedStocks.map((stock) => {
+            const latestUpdate = getLatestStockUpdate(stock.symbol);
+            const isRecentlyUpdated = latestUpdate && (Date.now() - latestUpdate.timestamp < 10000); // 10 seconds
+            
+            return (
+              <div key={stock.id} className={`${styles.card} ${isRecentlyUpdated ? styles.recentlyUpdated : ''}`}>
+                <h3>
+                  {stock.symbol} — {stock.shortName}
+                  {isRecentlyUpdated && (
+                    <span className={styles.updateIndicator} title="Actualizado recientemente">
+                      🔄
+                    </span>
+                  )}
+                </h3>
+                <p><strong>Precio:</strong> ${stock.price.toLocaleString()}</p>
+                <p>
+                  <strong>Cantidad disponible:</strong> {stock.quantity}
+                  {stock.quantity === 0 && (
+                    <span className={styles.outOfStock}> (Agotado)</span>
+                  )}
+                </p>
+                <button
+                  className={styles.button}
+                  onClick={() => navigate(`/actions/${stock.symbol}`)}
+                  disabled={stock.quantity === 0}
+                >
+                  Ver más
+                </button>
+              </div>
+            );
+          })}
         </div>
 
         <div className={styles.pagination}>
