@@ -30,6 +30,11 @@ export default function Navbar() {
         <button onClick={() => navigate('/admin-buy')} className={styles.navButton}>
           (Solo admin) Comprar stocks a broker
         </button>
+
+        <button onClick={() => navigate('/group-actions')} className={styles.navButton}>
+          Acciones del Grupo
+        </button>
+
         <button onClick={handleLogout} className={styles.navButton}>
           Cerrar sesión
         </button>

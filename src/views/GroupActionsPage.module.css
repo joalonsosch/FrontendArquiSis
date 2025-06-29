@@ -1,0 +1,54 @@
+@import 'open-props/open-props.min.css';
+@import 'open-props/normalize.min.css';
+
+.pageWrapper {
+  background-color: var(--surface-1);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 900px;
+  margin: var(--size-10) auto;
+  padding: var(--size-6);
+  background-color: var(--surface-2);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-3);
+  color: var(--text-1);
+  font-family: 'OCR A Std', monospace;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: var(--size-5);
+  font-family: 'Fredoka', sans-serif;
+  color: var(--text-1);
+}
+
+/* Tabla estilo retro/moderno */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'OCR A Std', monospace;
+  margin-top: var(--size-5);
+}
+
+.table th {
+  background-color: var(--surface-3);
+  color: var(--text-2);
+  padding: var(--size-3);
+  border-bottom: 2px solid var(--border-2);
+  text-align: center;
+  font-size: 1rem;
+}
+
+.table td {
+  padding: var(--size-3);
+  text-align: center;
+  border-bottom: 1px solid var(--border-2);
+  color: var(--text-1);
+}
+
+.table tr:hover {
+  background-color: var(--surface-3);
+  transition: background-color 0.2s ease-in-out;
+}
