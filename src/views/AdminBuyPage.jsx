@@ -19,8 +19,8 @@ export default function AdminBuyPage() {
       try {
         const token = await getAccessTokenSilently();
         const payload = JSON.parse(atob(token.split('.')[1]));
-        const roles = payload['https://api.arquisis.com/roles'] || [];
-        setIsAdmin(roles.includes('admin'));
+        const roles = payload['https://arquisis-back.com/roles'] || [];
+        setIsAdmin(roles.includes('Admin'));
       } catch (err) {
         console.error('Error verificando roles:', err);
       }
@@ -40,15 +40,32 @@ export default function AdminBuyPage() {
   const handleBuy = async () => {
     setFeedback('');
     try {
+      // Obtener precio actual desde /stocks/:symbol
+      const stockData = await callApi({
+        method: 'get',
+        url: `/stocks/${symbol}`,
+      });
+
+      const price = stockData?.price;
+
+      if (!price || isNaN(price)) {
+        throw new Error('Precio no disponible para este símbolo');
+      }
+
       const response = await callApi({
         method: 'post',
         url: '/admin/stocks/buy',
-        data: { symbol, quantity: parseInt(quantity) },
+        data: {
+          symbol,
+          quantity: parseInt(quantity),
+          price: parseInt(price),
+        },
       });
+
       setFeedback(`✅ Compra realizada. ID de solicitud: ${response.request_id}`);
     } catch (error) {
       console.error(error);
-      setFeedback('❌ Error al enviar la solicitud. Verifica los datos.');
+      setFeedback('❌ Error al enviar la solicitud. Verifica los datos o el símbolo.');
     }
   };
 
@@ -105,3 +122,4 @@ export default function AdminBuyPage() {
     </div>
   );
 }
+
