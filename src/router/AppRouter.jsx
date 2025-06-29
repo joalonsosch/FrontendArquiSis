@@ -12,6 +12,7 @@ import ErrorPage from '../views/ErrorPage';
 import WebpayForm from '../views/WebpayForm';
 import PaymentResponse from '../views/PaymentResponse';
 import AdminBuyPage from '../views/AdminBuyPage';
+import GroupActionsPage from '../views/GroupActionsPage';
 
 import ProtectedRoute from '../components/ProtectedRoute';
 
@@ -75,6 +76,16 @@ export default function AppRouter() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/group-actions"
+          element={
+            <ProtectedRoute>
+              <GroupActionsPage />
+            </ProtectedRoute>
+          }
+        />
+
       </Routes>
     </Router>
   );
